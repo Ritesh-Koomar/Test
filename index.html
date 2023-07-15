@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JEE Advanced</title>
+  <style>
+    /* CSS styles */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f1f1f1;
+    }
+    #test {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #333333;
+    }
+    .question {
+      display: none; /* Hide questions by default */
+      margin-bottom: 20px;
+    }
+    p {
+      font-size: 18px;
+      color: #555555;
+    }
+    .options label {
+      display: block;
+      margin-bottom: 10px;
+      color: #333333;
+    }
+    .options label input[type="radio"] {
+      margin-right: 5px;
+    }
+    #submit-btn,
+    #next-btn,
+    #prev-btn {
+      display: none;
+      margin-top: 20px;
+      margin-left: auto;
+      margin-right: 0;
+      background-color: #4caf50;
+      color: #ffffff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    #submit-btn:hover,
+    #next-btn:hover,
+    #prev-btn:hover {
+      background-color: #45a049;
+    }
+    #timer {
+      text-align: center;
+      font-size: 18px;
+      margin-bottom: 20px;
+      color: #555555;
+    }
+    .bookmark-container {
+      margin-bottom: 10px;
+    }
+    .bookmark {
+      display: none;
+      margin-right: 5px;
+      padding: 5px 10px;
+      background-color: #ccc;
+      color: #333;
+      font-weight: bold;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .bookmark:hover {
+      background-color: #aaa;
+    }
+    .current-bookmark {
+      background-color: #4caf50;
+      color: #fff;
+    }
+    .answered-bookmark {
+      background-color: #2196f3;
+      color: #fff;
+    }
+    .unanswered-bookmark {
+      background-color: #f44336;
+      color: #fff;
+    }
+    .correct-answer {
+      background-color: #c8e6c9;
+    }
+    .incorrect-answer {
+      background-color: #ffcdd2;
+    }
+    .time-over {
+      background-color: #ffecb3;
+    }
+  </style>
+</head>
+<body>
+  <h1>Mock Test 01 - JEE Advanced Pattern</h1>
+
+  <div id="test">
+    <div id="name-container">
+      <label for="name">Name:</label>
+      <input type="text" id="name" placeholder="Enter your name">
+      <button id="start-btn">Start Test</button>
+    </div>
+
+    <div id="timer" style="display: none;">Time Remaining: <span id="time">--:--:--</span></div>
+
+    <div class="bookmark-container">
+      <span class="bookmark" data-question-index="0">1</span>
+      <span class="bookmark" data-question-index="1">2</span>
+      <span class="bookmark" data-question-index="2">3</span>
+      <span class="bookmark" data-question-index="3">4</span>
+      <span class="bookmark" data-question-index="4">5</span>
+      <span class="bookmark" data-question-index="5">6</span>
+      <span class="bookmark" data-question-index="6">7</span>
+      <span class="bookmark" data-question-index="7">8</span>
+      <span class="bookmark" data-question-index="8">9</span>
+      <span class="bookmark" data-question-index="9">10</span>
+    </div>
+
+    <div class="question">
+      <p>Question 1: <img src="P1.png" alt="Loading"> <br /></p>
+      <div class="options">
+        <label><input type="radio" name="q1" value="a"> a) </label>
+        <label><input type="radio" name="q1" value="b"> b) </label>
+        <label><input type="radio" name="q1" value="c"> c) </label>
+        <label><input type="radio" name="q1" value="d"> d) </label>
+      </div>
+    </div>
+
+    <div class="question">
+      <p>Question 2: <img src="P2.png" alt=" "></p>
+      <div class="options">
+        <label><input type="radio" name="q2" value="a"> a)</label>
+        <label><input type="radio" name="q2" value="b"> b)</label>
+        <label><input type="radio" name="q2" value="c"> c)</label>
+        <label><input type="radio" name="q2" value="d"> d)</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <p>Question 3: <img src="P3.png" alt=" "></p>
+      <div class="options">
+        <label><input type="radio" name="q3" value="a"> a) </label>
+        <label><input type="radio" name="q3" value="b"> b) </label>
+        <label><input type="radio" name="q3" value="c"> c) </label>
+        <label><input type="radio" name="q3" value="d"> d) </label>
+      </div>
+    </div>
+
+    <div class="question">
+      <p>Question 4: <img src="P4.png" alt=" "></p>
+      <div class="options">
+        <label><input type="radio" name="q4" value="a"> a) Au</label>
+        <label><input type="radio" name="q4" value="b"> b) Ag</label>
+        <label><input type="radio" name="q4" value="c"> c) Fe</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <p>Question 5: <img src="P5.png" alt=" "></p>
+      <div class="options">
+        <label><input type="radio" name="q5" value="a"> a) Mars</label>
+        <label><input type="radio" name="q5" value="b"> b) Venus</label>
+        <label><input type="radio" name="q5" value="c"> c) Mercury</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <p>Question 6: What is the tallest mountain in the world?</p>
+      <div class="options">
+        <label><input type="radio" name="q6" value="a"> a) Mount Everest</label>
+        <label><input type="radio" name="q6" value="b"> b) K2</label>
+        <label><input type="radio" name="q6" value="c"> c) Kangchenjunga</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <p>Question 7: Who wrote the play "Romeo and Juliet"?</p>
+      <div class="options">
+        <label><input type="radio" name="q7" value="a"> a) William Shakespeare</label>
+        <label><input type="radio" name="q7" value="b"> b) George Bernard Shaw</label>
+        <label><input type="radio" name="q7" value="c"> c) Arthur Miller</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <p>Question 8: What is the largest ocean on Earth?</p>
+      <div class="options">
+        <label><input type="radio" name="q8" value="a"> a) Pacific Ocean</label>
+        <label><input type="radio" name="q8" value="b"> b) Atlantic Ocean</label>
+        <label><input type="radio" name="q8" value="c"> c) Indian Ocean</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <p>Question 9: Which country is known as the "Land of the Rising Sun"?</p>
+      <div class="options">
+        <label><input type="radio" name="q9" value="a"> a) Japan</label>
+        <label><input type="radio" name="q9" value="b"> b) China</label>
+        <label><input type="radio" name="q9" value="c"> c) South Korea</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <p>Question 10: Who is the author of the Harry Potter book series?</p>
+      <div class="options">
+        <label><input type="radio" name="q10" value="a"> a) J.K. Rowling</label>
+        <label><input type="radio" name="q10" value="b"> b) Stephenie Meyer</label>
+        <label><input type="radio" name="q10" value="c"> c) Suzanne Collins</label>
+      </div>
+    </div>
+
+    <button id="prev-btn">Previous</button>
+    <button id="next-btn">Next</button>
+    <button id="submit-btn">Submit</button>
+  </div>
+
+  <script>
+    // JavaScript code
+    var nameContainer = document.getElementById("name-container");
+    var nameInput = document.getElementById("name");
+    var startBtn = document.getElementById("start-btn");
+    var testContainer = document.getElementById("test");
+    var timerContainer = document.getElementById("timer");
+
+    startBtn.addEventListener("click", startTest);
+
+    function startTest() {
+      var name = nameInput.value.trim();
+      if (name === "") {
+        alert("Please enter your name to start the test.");
+        return;
+      }
+
+      nameContainer.style.display = "none";
+      testContainer.style.display = "block";
+      nameInput.disabled = true;
+      nameInput.classList.add("disabled");
+      nameInput.placeholder = name;
+
+      startTimer();
+      showQuestion(currentQuestionIndex); // Show the first question
+    }
+
+    var questions = document.getElementsByClassName("question");
+    var totalQuestions = questions.length;
+    var currentQuestionIndex = 0;
+
+    var submitBtn = document.getElementById("submit-btn");
+    var nextBtn = document.getElementById("next-btn");
+    var prevBtn = document.getElementById("prev-btn");
+
+    submitBtn.addEventListener("click", function() {
+      clearInterval(countdown); // Stop the timer
+      confirmSubmit();
+    });
+
+    nextBtn.addEventListener("click", function() {
+      showQuestion(currentQuestionIndex + 1);
+    });
+
+    prevBtn.addEventListener("click", function() {
+      showQuestion(currentQuestionIndex - 1);
+    });
+
+    var timer = document.getElementById("time");
+    var totalTime = 3 * 60 * 60; // 3 hours in seconds
+    var timeRemaining = totalTime;
+    var countdown = null;
+
+    function startTimer() {
+      countdown = setInterval(updateTimer, 1000);
+      timerContainer.style.display = "block"; // Show the timer
+      submitBtn.style.display = "inline-block"; // Show the submit button
+      nextBtn.style.display = "inline-block"; // Show the next button
+      prevBtn.style.display = "inline-block"; // Show the previous button
+      var bookmarks = document.getElementsByClassName("bookmark");
+      for (var i = 0; i < bookmarks.length; i++) {
+        bookmarks[i].style.display = "inline-block"; // Show the bookmarks
+      }
+    }
+
+    function updateTimer() {
+      var hours = Math.floor(timeRemaining / 3600);
+      var minutes = Math.floor((timeRemaining % 3600) / 60);
+      var seconds = timeRemaining % 60;
+
+      timer.textContent = padZero(hours) + ":" + padZero(minutes) + ":" + padZero(seconds);
+
+      if (timeRemaining <= 0) {
+        clearInterval(countdown);
+        timer.textContent = "Time's up!";
+        submitBtn.disabled = true;
+        nextBtn.disabled = true;
+        prevBtn.disabled = true;
+        calculateScore();
+      } else {
+        timeRemaining--;
+      }
+    }
+
+    function padZero(number) {
+      return number.toString().padStart(2, "0");
+    }
+
+    function showQuestion(questionIndex) {
+      if (questionIndex < 0 || questionIndex >= totalQuestions) {
+        return;
+      }
+
+      questions[currentQuestionIndex].style.display = "none";
+      currentQuestionIndex = questionIndex;
+      questions[currentQuestionIndex].style.display = "block";
+
+      if (currentQuestionIndex === 0) {
+        prevBtn.style.display = "none";
+      } else {
+        prevBtn.style.display = "inline-block";
+      }
+
+      if (currentQuestionIndex === totalQuestions - 1) {
+        nextBtn.style.display = "none";
+      } else {
+        nextBtn.style.display = "inline-block";
+      }
+
+      updateBookmarks();
+    }
+
+    function updateBookmarks() {
+      var bookmarks = document.getElementsByClassName("bookmark");
+
+      for (var i = 0; i < bookmarks.length; i++) {
+        bookmarks[i].classList.remove("current-bookmark");
+        bookmarks[i].classList.remove("answered-bookmark");
+        bookmarks[i].classList.remove("unanswered-bookmark");
+
+        if (i === currentQuestionIndex) {
+          bookmarks[i].classList.add("current-bookmark");
+        } else if (bookmarks[i].getAttribute("data-answered") === "true") {
+          bookmarks[i].classList.add("answered-bookmark");
+        } else if (bookmarks[i].getAttribute("data-answered") === "false") {
+          bookmarks[i].classList.add("unanswered-bookmark");
+        }
+      }
+    }
+
+    function confirmSubmit() {
+      var confirmSubmit = confirm("Are you sure you want to submit the test?");
+      if (confirmSubmit) {
+        calculateScore();
+      }
+    }
+
+    function calculateScore() {
+      var correctAnswers = 0;
+      var incorrectAnswers = 0;
+      var unansweredQuestions = 0;
+
+      for (var i = 0; i < totalQuestions; i++) {
+        var question = questions[i];
+        var options = question.querySelectorAll('input[type="radio"]');
+        var selectedOption = null;
+        for (var j = 0; j < options.length; j++) {
+          if (options[j].checked) {
+            selectedOption = options[j].value;
+            break;
+          }
+        }
+
+        if (selectedOption === "a") {
+          correctAnswers++;
+          question.classList.add("correct-answer");
+        } else if (selectedOption !== null) {
+          incorrectAnswers++;
+          question.classList.add("incorrect-answer");
+        } else {
+          unansweredQuestions++;
+        }
+      }
+
+      var totalMarks = totalQuestions * 4;
+      var marksObtained = correctAnswers * 4 - incorrectAnswers;
+      var percentage = (marksObtained / totalMarks) * 100;
+
+      // Open a new window to display the results
+      var resultWindow = window.open("", "Test Result", "width=400,height=400");
+
+      // Write the content to the new window
+      resultWindow.document.write("<h1>Test Result</h1>");
+      resultWindow.document.write("<p>Name: " + nameInput.placeholder + "</p>");
+      resultWindow.document.write("<p>Your score is: " + marksObtained + " out of " + totalMarks + "</p>");
+      resultWindow.document.write("<p>Percentage: " + percentage.toFixed(2) + "%</p>");
+      resultWindow.document.write("<p>Correct Answers: " + correctAnswers + "</p>");
+      resultWindow.document.write("<p>Wrong Answers: " + incorrectAnswers + "</p>");
+      resultWindow.document.write("<p>Unanswered Questions: " + unansweredQuestions + "</p>");
+
+      if (percentage >= 60) {
+        resultWindow.document.write("<h2>Well Done!</h2>");
+        resultWindow.document.write('<img src="well_done_image.jpg" alt="Well Done">');
+      } else if (percentage >= 40 && percentage < 60) {
+        resultWindow.document.write("<h2>Good!</h2>");
+        resultWindow.document.write('<img src="good_image.jpg" alt="Good">');
+      } else {
+        resultWindow.document.write("<h2>Keep Trying!</h2>");
+        resultWindow.document.write('<img src="keep_trying_image.jpg" alt="Keep Trying">');
+      }
+
+      // Close the main test window
+      window.close();
+    }
+
+    var bookmarks = document.getElementsByClassName("bookmark");
+
+    for (var i = 0; i < bookmarks.length; i++) {
+      bookmarks[i].addEventListener("click", function() {
+        var questionIndex = parseInt(this.getAttribute("data-question-index"));
+        showQuestion(questionIndex);
+      });
+    }
+  </script>
+</body>
+</html>
